@@ -26,7 +26,7 @@ class Action:
         self.list_action.append(self)
 
     def __repr__(self) -> str:
-        return self.name + ", price : " + str(self.price) + ", profit : " + str(self.profit) + ", ration : "+ str(self.ratio)
+        return self.name + ", price : " + str(self.price) + "€ , profit : " + str(self.gain_in_euro) +"€, ratio : "+ str(self.ratio)
 
 
 def read_file(file):
@@ -41,6 +41,18 @@ def read_file(file):
         for row in reader:
             Action(row['name'], float(row['price']), float(row['profit']))
 
+def display_result(stocks, total_cost, total_benefit):
+    """print result : Stocks combinaisons, total cost, total benefit
+
+    Args:
+        actions (lits): stock to buy
+        total_cost (float): total stock's cost
+        total_benefit (float): total stocks benefit
+    """
+    for el in stocks:
+        print(el)
+    print("total cost : ", round(total_cost,2),"€")
+    print("total return : ", round(total_benefit, 2),"€")
 
 def main(file):
     read_file(file)
@@ -49,19 +61,14 @@ def main(file):
 
     total_cost = 0
     total_benefit = 0
-    actions = []
+    stocks = []
     for el in sorted_list:
         if (total_cost + el.price) <= 500 and (el.price > 0):
-            actions.append(el)
+            stocks.append(el)
             total_cost += el.price
             total_benefit += (el.price * el.profit)/100
-        else:
-            pass
 
-    for el in actions:
-        print(el)
-    print("total cost : ", round(total_cost,2), "€")
-    print("total benefit : ", round(total_benefit, 2), "€")
+    display_result(stocks, total_cost, total_benefit)
 
 
 

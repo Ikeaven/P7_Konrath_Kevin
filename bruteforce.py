@@ -13,10 +13,11 @@ class Action:
         self.price = price
         self.name = name
         self.profit = profit
+        self.gain_in_euro = (price*profit)/100
         self.list_action.append(self)
 
     def __repr__(self) -> str:
-        return self.name + ", " + str(self.price) + ", " + str(self.profit)
+        return self.name + ",  price : " + str(self.price) + " €, profit en euro : " + str(self.gain_in_euro) + "€"
 
 
 def rSubset(array, r):
