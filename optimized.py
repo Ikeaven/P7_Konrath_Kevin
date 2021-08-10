@@ -1,9 +1,13 @@
+""" Optimized module """
+
 import csv
 from os import sendfile
 from typing import List
 
-csv_file = './data/dataset-forcebrut.csv'
-# csv_file = './data/dataset1_Python+P7.csv'
+from utilities import time_it
+
+# csv_file = './data/dataset-forcebrut.csv'
+csv_file = './data/dataset1_Python+P7.csv'
 # csv_file = './data/dataset2_Python+P7.csv'
 
 class Action:
@@ -41,6 +45,7 @@ def read_file(file):
         for row in reader:
             Action(row['name'], float(row['price']), float(row['profit']))
 
+
 def display_result(stocks, total_cost, total_benefit):
     """print result : Stocks combinaisons, total cost, total benefit
 
@@ -54,6 +59,8 @@ def display_result(stocks, total_cost, total_benefit):
     print("total cost : ", round(total_cost,2),"€")
     print("total return : ", round(total_benefit, 2),"€")
 
+
+@time_it
 def main(file):
     read_file(file)
 
@@ -67,6 +74,8 @@ def main(file):
             stocks.append(el)
             total_cost += el.price
             total_benefit += (el.price * el.profit)/100
+        if total_cost >= 500:
+            break
 
     display_result(stocks, total_cost, total_benefit)
 

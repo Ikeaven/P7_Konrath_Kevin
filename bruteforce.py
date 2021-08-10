@@ -1,10 +1,13 @@
+""" BrutForce module """
+
 import csv
 from itertools import combinations
 from typing import List
+from utilities import time_it
+
+MAX_COST = 500
 
 csv_file = './data/dataset-forcebrut.csv'
-# csv_file = './data/dataset1_Python+P7.csv'
-
 
 class Action:
     list_action: List = []
@@ -120,6 +123,7 @@ def display_result(most_profitable_combinaison, price, max_benefit):
     print("Total return : ", round(max_benefit, 2),"€")
 
 
+@time_it
 def main(file):
     """Main function
 
@@ -128,7 +132,7 @@ def main(file):
     """
 
     read_file(file)
-    combi_actions_possible = search_all_possibilities(500)
+    combi_actions_possible = search_all_possibilities(MAX_COST)
     max_benefit, benefit_array = search_max_profit(combi_actions_possible)
     most_profitable_combinaison, price = search_max_profitable_combinaison(combi_actions_possible, benefit_array, max_benefit)
 
