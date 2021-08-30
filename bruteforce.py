@@ -7,7 +7,7 @@ from utilities import time_it
 
 MAX_COST = 500
 
-csv_file = './data/dataset-forcebrut.csv'
+CSV_FILE = './data/dataset-forcebrut.csv'
 
 class Action:
     list_action: List = []
@@ -141,4 +141,4 @@ def main(file):
 
 
 if __name__ == "__main__":
-    main(csv_file)
+    main(CSV_FILE)
